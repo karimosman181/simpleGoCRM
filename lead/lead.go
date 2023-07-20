@@ -20,7 +20,16 @@ type Lead struct {
  * get all leads record
  **/
 func GetLeads(c *fiber.Ctx) {
+	//get db connection
+	db := database.DBConn
 
+	var leads []Lead
+
+	//get records from DB
+	db.Find(&leads)
+
+	//return response
+	c.JSON(leads)
 }
 
 /**
