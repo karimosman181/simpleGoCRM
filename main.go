@@ -12,10 +12,10 @@ import (
  *	create routes
  **/
 func setupRoutes(app *fiber.App) {
-	app.Get(GetLeads)
-	app.Get(GetLead)
-	app.Post(NewLeads)
-	app.Delete(DeleteLeads)
+	app.Get("/lead", lead.GetLeads)
+	app.Get("/lead/:id", lead.GetLead)
+	app.Post("/lead", lead.NewLeads)
+	app.Delete("/lead/:id", lead.DeleteLeads)
 }
 
 /**
