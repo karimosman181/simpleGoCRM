@@ -57,7 +57,25 @@ func GetLead(c *fiber.Ctx) {
  *
  * create new lead
  **/
-func NewLeads(c *fiber.Ctx) {}
+func NewLeads(c *fiber.Ctx) {
+	//get db connection
+	db := database.DBConn
+
+	//define lead
+	lead := new(Lead)
+
+	//check for error after parsing body
+	if err := c.BodyParser(lead); err != nil {
+
+		//return error
+		c.Status(503).Send(err)
+		return
+	}
+
+	//save new lead
+	db.Create(&lead)
+	c.JSON(lead)
+}
 
 /**
  *
