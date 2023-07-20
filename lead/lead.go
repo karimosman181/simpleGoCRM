@@ -9,10 +9,10 @@ import (
 
 type Lead struct {
 	gorm.Model
-	Name    string
-	Company string
-	Email   string
-	Phone   string
+	Name    string `json:"name"`
+	Company string `json:"company"`
+	Email   string `json:"email"`
+	Phone   string `json:"phone"`
 }
 
 /**
