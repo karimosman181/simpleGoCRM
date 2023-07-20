@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/karimosman181/simpleGoCRM/database"
 	"github.com/karimosman181/simpleGoCRM/lead"
 )
@@ -16,6 +17,7 @@ func setupRoutes(app *fiber.App) {
 	app.Get("/lead/:id", lead.GetLead)
 	app.Post("/lead", lead.NewLeads)
 	app.Delete("/lead/:id", lead.DeleteLeads)
+	app.Put("/lead/:id", lead.UpdateLeads)
 }
 
 /**

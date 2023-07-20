@@ -106,3 +106,58 @@ func DeleteLeads(c *fiber.Ctx) {
 	//return success
 	c.Send("Lead deleted successfully")
 }
+
+/**
+ *
+ * update lead
+ **/
+func UpdateLeads(c *fiber.Ctx) {
+
+	//get id from params
+	id := c.Params("id")
+
+	//get db connection
+	db := database.DBConn
+
+	var lead Lead
+
+	//search for lead if exists
+	db.First(&lead, id)
+
+	//check if exits
+	if lead.Name == "" {
+		//return error
+		c.Status(404).Send("Lead not Found")
+		return
+	}
+
+	//define lead
+	uplead := new(Lead)
+
+	//check for error after parsing body
+	if err := c.BodyParser(uplead); err != nil {
+
+		//return error
+		c.Status(503).Send(err)
+		return
+	}
+
+	if uplead.Name != "" {
+		lead.Name = uplead.Name
+	}
+	if uplead.Company != "" {
+		lead.Company = uplead.Company
+	}
+	if uplead.Phone != "" {
+		lead.Phone = uplead.Phone
+	}
+	if uplead.Email != "" {
+		lead.Email = uplead.Email
+	}
+
+	//update record
+	db.Save(&lead)
+
+	c.JSON(lead)
+
+}
