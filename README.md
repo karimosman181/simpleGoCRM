@@ -1,2 +1,3 @@
 # simpleGoCRM
-CRM with Golang Fiber
+
+CRM with Golang Fiber And SQLite
